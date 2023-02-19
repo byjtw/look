@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Spelling Practice</title>
+ <style>
+  #vocabulary-list {
+   display: flex;
+   flex-wrap: wrap;
+  }
+  #vocabulary-list div {
+   margin: 10px;
+   padding: 10px;
+   border: 1px solid black;
+   width: 200px;
+   text-align: center;
+   font-size: 20px;
+  }
+ </style>
+</head>
+<body>
+ <h1>Spelling Practice</h1>
+ <p>Use the "look say cover write check" strategy to practice spelling the following words:</p>
+ <div id="vocabulary-list">
+  <!-- Array of vocabulary words provided by teacher -->
+  <?php
+   $vocabulary = array("cat", "dog", "bird", "tree", "house", "book", "car", "ball", "sun", "moon");
+   foreach ($vocabulary as $word) {
+    echo "<div>";
+    echo $word;
+    echo "</div>";
+   }
+  ?>
+ </div>
+ <br>
+ <button onclick="reset()">Reset</button>
+ <button onclick="check()">Check</button>
+ <br><br>
+ <!-- Form for students to practice spelling -->
+ <form>
+  <?php
+   foreach ($vocabulary as $word) {
+    echo "<label>$word:</label>";
+    echo "<input type='text' id='$word'>";
+    echo "<br>";
+   }
+  ?>
+ </form>
+ <script>
+  // Reset the input fields to empty
+  function reset() {
+   var inputs = document.getElementsByTagName("input");
+   for (var i = 0; i < inputs.length; i++) {
+    inputs[i].value = "";
+   }
+  }
+
+  // Check if the input fields match the correct spelling
+  function check() {
+   var inputs = document.getElementsByTagName("input");
+   for (var i = 0; i < inputs.length; i++) {
+    var input = inputs[i];
+    var word = input.id;
+    var correctSpelling = word.toUpperCase();
+    if (input.value.toUpperCase() == correctSpelling) {
+     input.style.color = "green";
+    } else {
+     input.style.color = "red";
+    }
+   }
+  }
+ </script>
+</body>
+</html>
